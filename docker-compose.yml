@@ -1,0 +1,20 @@
+services:
+  api:
+    build: .
+    command: ["python", "-m", "uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    environment:
+      MODEL_DIR: /app/models/layoutlmv3-multidoc-best
+    volumes:
+      - ./models/layoutlmv3-multidoc-best:/app/models/layoutlmv3-multidoc-best:ro
+    ports:
+      - "8000:8000"
+
+  streamlit:
+    build: .
+    command: ["python", "-m", "streamlit", "run", "app/streamlit_app.py", "--server.address=0.0.0.0", "--server.port=8501"]
+    environment:
+      API_URL: http://api:8000
+    depends_on:
+      - api
+    ports:
+      - "8501:8501"

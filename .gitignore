@@ -1,0 +1,21 @@
+# Local environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.streamlit/
+.DS_Store
+/01_data_preparation.ipynb
+
+# Private/local model weights and datasets
+models/*
+!models/.gitkeep
+data/
+checkpoints/
+
+# Generated reports and runtime files
+outputs/metrics/
+outputs/*.json
+outputs/*.jsonl
+*.log
